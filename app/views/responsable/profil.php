@@ -3,6 +3,10 @@
 require_once __DIR__ . '/../../core/session_gest.php';
 Session_gest::start();
 
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+
 ?>
  <!DOCTYPE html>
  <html lang="en">
@@ -24,6 +28,7 @@ Session_gest::start();
         </div>
         <div class="gp">
             <button type="submit">Se connecter</button>
+            <a href="/public/index.php?responsable/new">Créer un nouveau compte</a>
         </div>
     </form>
     <?php

@@ -62,16 +62,24 @@ class MembreCont{
     }
     
     public function deconnexion(){
-        Session_gest::delete('email');
-        Session_gest::delete('nom');
-        Session_gest::delete('password_hash');
-        Session_gest::delete('id');
+        session_gest::delete('email');
+        session_gest::delete('nom');
+        session_gest::delete('password_hash');
+        session_gest::delete('id');
         Session_gest::destroy();
+        header('Location : /responsable/profil');
     }
     public function lire_membre(){
         $resul = $this->membre->read();
         require_once __DIR__ . '/../views/membre/liste_membre.php';
     }
-    
+    public function dashboard(){
+        if(!Session_gest::get('email')){
+            header('Location: /responsable/profil');
+            exit;
+        }else{
+            require_once __DIR__ . '/../views/responsable/dashboard.php';
+        }
+    }
 }
 ?>

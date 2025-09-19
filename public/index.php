@@ -37,14 +37,14 @@ switch($action){
         break;
     case 'responsable/connexion':
         if($membre->identification_responsable($_POST['email'], $_POST['password'])){
-            
             include_once '../app/views/responsable/dashboard.php';
         }else{
             include_once '../app/views/responsable/profil.php';
         }
         break;
     case 'deconnexion':
-        include_once '../'
+        $membre->deconnexion();
+        include_once '../app/views/responsable/profil.php';
         break;
     case 'responsable/profil':
         include_once '../app/views/responsable/profil.php';
