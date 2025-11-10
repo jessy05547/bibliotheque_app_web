@@ -5,6 +5,14 @@ class MembreMod{
     private $conn;
     private $table = 'membre';
     private $table_resp = 'responsable';
+    private $table_liv = 'livre';
+    // livre
+    public $livre_id;
+    public $titre;
+    public $auteur;
+    public $type;
+    public $edition;
+    public $date_acquisition;
     
     // membre
     public $membre_id;
@@ -24,11 +32,24 @@ class MembreMod{
         $this->conn = $com->getConnexion();
     }
 
-    public function ajout_membre($nom, $prenom, $telephone, $email, $age, $sexe){
-        $query = "INSERT INTO " . $this->table . "(nom, prenom, telephone, email, age, sexe) VALUES (?,?,?,?,?,?)";
+    public function ajout_livre($titre, $auteur, $type, $edition, $date_acquisition){
+        $query = "INSERT INTO " . $this->table_liv . "(titre, auteur, type_livre, edition, date_acquisition) VALUES (?,?,?,?,?)";
+        if(!$this->conn) throw new Exception('No database connection');
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute([$titre, $auteur, $type, $edition, $date_acquisition]);
+    }
+    public function read_livre(){
+        $query = "SELECT * FROM " . $this->table_liv;
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $livre = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $livre;
+    }
+    public function ajout_membre($nom, $prenom, $telephone, $email, $age, $sexe, $date_inscription){
+        $query = "INSERT INTO " . $this->table . "(nom, prenom, telephone, email, age, sexe, date_inscription) VALUES (?,?,?,?,?,?,?)";
         if (!$this->conn) throw new Exception('No database connection');
         $stmt = $this->conn->prepare($query);
-        $stmt->execute([$nom, $prenom,$telephone,$email,$age,$sexe]);
+        $stmt->execute([$nom, $prenom,$telephone,$email,$age,$sexe,$date_inscription]);
     }
     public function ajout_responsable($nom, $prenom, $telephone, $email, $password){
         $query = "INSERT INTO " . $this->table_resp . "(nom, prenom, telephone, email, password_hash) VALUES (?,?,?,?,?) ";

@@ -5,6 +5,7 @@ require_once '../app/models/membreMod.php';
 require_once '../app/controllers/membreCont.php';
 require_once '../app/core/session_gest.php';
 
+date_default_timezone_set('Africa/Nairobi');
 $db = new database();
 $conn = $db->getConnexion();
 $membre = new MembreCont($conn);
@@ -17,10 +18,16 @@ $lien = parse_url($requete, PHP_URL_QUERY);
 $action = $lien;
 
 $id = isset($_GET['membre_id']) ? $_GET['membre_id'] : null;
+$cond = $action == 'responsable/connexion';
 
 switch($action){
     case 'index':
-        $membre->index();
+        if($membre->dashboard()){
+            $membre->index();
+            include_once '../app/views/index.php';
+        }else{
+            include_once '../app/views/responsable/profil.php';
+        }
         break;
     case 'membre_ajout':
         $membre->creer();
@@ -30,33 +37,72 @@ switch($action){
         break;
     case 'membre/liste':
         $membre->lire_membre();
+        
         include_once '../app/views/membre/liste_membre.php';
+        break;
+    case 'livre/liste':
+        $membre->lire_livre();
+        include_once '../app/views/livre/livre.php';
         break;
     case 'responsable/inscription':
         $membre->creer_reponsable();
         break;
     case 'responsable/connexion':
         if($membre->identification_responsable($_POST['email'], $_POST['password'])){
+            session_regenerate_id(true);
             include_once '../app/views/responsable/dashboard.php';
         }else{
             include_once '../app/views/responsable/profil.php';
         }
         break;
-    case 'deconnexion':
+    case 'ajout/livre':
+        $membre->ajout_livre();
+        break;
+    case 'reponsable/deconnexion':
         $membre->deconnexion();
-        include_once '../app/views/responsable/profil.php';
+        if(!empty($_SESSION['email'])){
+            include_once '../app/views/responsable/profil.php';
+        }else{
+            include_once '../app/views/index.php';
+        }
         break;
     case 'responsable/profil':
         include_once '../app/views/responsable/profil.php';
         break;
-    case 'responsable/new':
+    case 'new':
         include_once '../app/views/responsable/inscription.php';
         break;
     case 'dashboard':
         include_once '../app/views/responsable/dashboard.php';
         break;
+    case 'ajout_livre':
+        include_once '../app/views/livre/nouveau_livre.php';
+        break;
+    case 'liste_livre':
+        include_once '../app/views/livre/livre.php';
+        break;
+    case 'setting':
+        include_once '../app/views/fonction/setting.php';
+        require_once __DIR__ . '/../app/views/index.php';
+        break;
+    case 'membre/emprunt':
+        include_once '../app/views/membre/emprunt.php';
+        require_once __DIR__ . '/../app/views/index.php';
+        break;
+    case 'membre/retour':
+        include_once '../app/views/membre/retour.php';
+        require_once __DIR__ . '/../app/views/index.php';
+        break;
+    case 'notification':
+            include_once '../app/views/fonction/notification.php';
+            require_once __DIR__ . '/../app/views/index.php';
+            break;
+    case 'search':
+        include_once '../app/views/fonction/search.php';
+        require_once __DIR__ . '/../app/views/index.php';
+        break;
     default:
         include_once '../app/views/responsable/profil.php';
-        
+        break;       
 }
 ?>

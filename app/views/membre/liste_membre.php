@@ -4,10 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/css/membre_liste.css">
     <title>Document</title>
 </head>
 <body>
     <div class="tableau">
+    // Forcer reload si la page est reprise depuis le back-forward cache
+    window.addEventListener('pageshow', function(event) {
+        if (event.persisted) {
+            window.location.reload(true);
+        }
+    });
         <table border="1">
             <thead>
                 <tr>
@@ -23,8 +30,8 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
                 <?php foreach($resul as $row): ?>
+                <tr>
                     <td><?= $row['membre_id'] ?></td>
                     <td><?= $row['nom'] ?></td>
                     <td><?= $row['prenom'] ?></td>
@@ -33,12 +40,8 @@
                     <td><?= $row['age'] ?></td>
                     <td><?= $row['sexe'] ?></td>
                     <td><?= $row['date_inscription'] ?></td>
-                    <!-- <td>
-                        <a href="">Modifier</a>
-                        <a href="/public/index.php?membre/supprime">Supprimer</a>
-                    </td> -->
-                <?php endforeach; ?>
                 </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
     </div>

@@ -1,0 +1,40 @@
+.parent{
+    background:url(../img/library-488690.jpg);
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    position: relative;
+    background-attachment: fixed;
+}
+
+form{
+    width: 25%;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+#label{
+    color: rgb(12, 165, 192);
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+.deux{
+    position:absolute;
+    left:43%;
+    top: 15%;
+}
+.un{
+    display: flex;
+    flex-direction: column;
+    gap: 25px 0;
+}
+#password, #email{
+    background: #00000048;
+    color: aliceblue;
+    font-size: 1.1rem;
+}

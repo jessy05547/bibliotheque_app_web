@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . '/../index.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,6 +25,9 @@
         </div>
         <div class="gp">
             <input type="text" name="age" id="" placeholder="votre age">
+        </div>
+        <div class="gp">
+            <input type="date" name="date" id="" pattern="dd/mm/yyyy" title="dd/mm/yyyy" required>
         </div>
         <div class="gp">
             <label for="sexe">Homme</label>

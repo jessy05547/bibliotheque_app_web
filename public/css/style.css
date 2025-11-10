@@ -1,0 +1,233 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.cor{
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    
+}
+.image{
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    background: url(/public/img/library-488690.jpg);
+    background-size:cover;
+    background-repeat: no-repeat;
+    filter: brightness(.7) blur(5px) saturate(1.2);
+    
+}
+section{
+    width: 20%;
+    height: 80%;
+    background: #f8f7f51e;
+    border-radius: 12px;
+    box-shadow: 0px 0px 8px 0px #131216;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    left: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px 0;
+    padding: 20px;
+}
+
+.right{
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* position: relative; */
+}
+nav{
+    width: 99%;
+    height: 8%;
+    background: #f8f7f51e;
+    border-radius: 12px;
+    box-shadow: 0px 0px 8px 0px #131216;
+    position: absolute;
+    margin:8px auto;
+    left: 0;
+    right: 0;
+    /* margin: 10px 0; */
+}
+main{
+    width: 77%;
+    height: 80%;
+    background: #f8f7f51e;
+    border-radius: 12px;
+    box-shadow: 0px 0px 8px 0px #131216;
+    position: absolute;
+    right: 8px;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    padding: 10px;
+    overflow-x: hidden;
+}
+footer{
+    width: 99%;
+    height: 50px;
+    background: #f8f7f51e;
+    border-radius: 12px;
+    box-shadow: 0px 0px 8px 0px #131216;
+    position: absolute;
+    bottom: 20px;
+    right: 0;
+    left: 0;
+    margin: auto;
+}
+li{
+    list-style: none;
+    position: absolute;
+    top: 5px;
+    right: 8px;
+}
+.src{
+    width: 50px;
+    height:50px ;
+    border: 3px solid #f1f0ee;
+    padding: 10px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #eeeaea9c;
+}
+#src{
+    width: 30px;
+    height: auto;
+}
+.parametre{
+    text-decoration: none;
+    margin:50px 8px;
+    color: #131216;
+    font-weight: 600;
+    text-transform: capitalize;
+    font-size: 18px;
+}
+.parametre:hover{
+    text-decoration: underline;
+    transition: all .8s linear;
+}
+#img{
+    width: 40px;
+    height: auto;   
+}
+.lab{
+    color: #131216;
+    font-weight: 600;
+    font-size: 18px;
+    text-transform: capitalize;
+    text-decoration: none;
+    margin-left: 10px;
+}
+.menu_l{
+    display: flex;
+    align-items: center;
+    gap: 0 10px;
+    text-decoration: none;
+    transition: all .8s ease-in-out;
+}
+.bo{
+    border: 0px solid #131216;
+}
+nav .wrapper{
+    width: 95%;
+    height: 100%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+nav .wrapper .gip{
+    width: 100%;
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    gap: 0 20px;
+    position: relative;
+    left: 0;
+    right: 0;
+    /* margin: auto; */
+}   
+nav .wrapper .gip .log{
+    width: 20%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    
+}
+nav .wrapper .gip .log #logo{
+    width: 100%;
+    height: 100%;
+    height: auto;
+    cursor: pointer;
+}
+.menu_l:hover{
+    background: #eeeaea9c;
+    padding: 5px 10px;
+    border-radius: 8px;
+    /* transition: all .5s ease-in-out; */
+}
+nav .wrapper .notification{
+    width: 20%;
+    display: flex;
+    align-items: center;
+    gap: 0 15px;
+    position: absolute;
+    justify-content: flex-end;
+    right: 0;
+}
+nav .wrapper .notification #ic{
+    width: 30px;
+    height: auto;
+    cursor: pointer;
+}
+nav .wrapper .notification #ic:hover{
+    transform: scale(1.1);
+    transition: all .3s ease-in-out;
+}
+nav .wrapper .gip ul{
+    width: 60%;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    justify-content: space-evenly;
+}
+nav .wrapper .gip ul li{
+    width: 100%;
+    list-style: none;
+    position: relative;
+    /* margin: 0 px; */
+}
+nav .wrapper .gip ul li .menu_n{
+    text-decoration: none;
+    color: #131216;
+    font-weight: 600;
+    text-transform: capitalize;
+    font-size: 18px;
+    margin: 0 2px;
+    transition: all .5s linear;
+}
+nav .wrapper .gip ul li .menu_n:hover{
+    color: #fca302;
+}
+.date{
+    position: absolute;
+    bottom: 5px;
+    left: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #131216;
+    text-transform: capitalize;
+}
