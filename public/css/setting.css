@@ -8,15 +8,32 @@ body{
     height: 100%;
     background: #1e1e2f;
     font-family: 'Poppins', sans-serif;
-    color: #fff;
+    color: #1e1e2f;
     overflow: hidden;
 }
 h1{
     text-align: center;
     margin: 20px 0;
 }
-#formulaire{
-    width: 70%;
+.container{
+    width: 100%;
+    height: auto;
+    padding: 20px;
+}
+#profil_img{
+    width: 250px;
+    height: 250px;  
+    background: #f8f7f51e;
+    border-radius: 50%;
+    box-shadow: 0px 0px 8px 0px #131216;
+    margin: 20px auto;
+    padding: 2px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 0; 
+}
+.form-profil{
+    width: 80%;
     height: auto;
     background: #f8f7f51e;
     border-radius: 12px;
@@ -27,35 +44,23 @@ h1{
     grid-template-columns: repeat(2, 1fr);
     gap: 20px 0;
 }
-.gp{
+.contenu-profil{
     display: flex;
     flex-direction: column;
     gap: 10px 0;
     padding: 0 10px;
 }
-.gp input{
+.groupe{
+    display: flex;
+    flex-direction: column;
+    gap: 10px 0;
+    padding: 0 10px;
+}
+.groupe input{
     height: 35px;
     border-radius: 8px;
     border: none;
     padding: 0 10px;
     background: #131216;
     color: #fff;
-}
-.annuler{
-    text-decoration: none;
-    color: #0675a1;
-    background: #f8f7f7;
-    padding: 10px 15px;
-    border-radius: 8px;
-    margin-left: 10px;
-    display: inline-block;
-    text-align: center;
-    height: 35px;
-    line-height: 15px;
-
-}
-.annuler:hover{
-    background: #0675a1;
-    color: #fff;
-    transition: all 0.8s ease-in-out;
 }

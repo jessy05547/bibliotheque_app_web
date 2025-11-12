@@ -43,7 +43,7 @@ class MembreMod{
         $stmt->execute([$titre,$code, $auteur, $type, $edition, $date_acquisition, $image_path]);
     }
     public function read_livre(){
-        $query = "SELECT * FROM " . $this->table_liv;
+        $query = "SELECT * FROM " . $this->table_liv;;
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $livre = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -55,11 +55,11 @@ class MembreMod{
         $stmt = $this->conn->prepare($query);
         $stmt->execute([$nom, $prenom,$telephone,$email,$age,$sexe,$date_inscription, $membre_path]);
     }
-    public function ajout_responsable($nom, $prenom, $telephone, $email, $password){
-        $query = "INSERT INTO " . $this->table_resp . "(nom, prenom, telephone, email, password_hash) VALUES (?,?,?,?,?) ";
-        // if (!$this->conn) throw new Exception('No database connection');
+    public function ajout_responsable($nom, $prenom, $telephone, $email, $password,$date_inscription,$image_path){
+        $query = "INSERT INTO " . $this->table_resp . "(nom, prenom, telephone, email, password_hash, date_creation, responsable_path) VALUES (?,?,?,?,?,?,?) ";
+        if (!$this->conn) throw new Exception('No database connection');
         $stmt = $this->conn->prepare($query);
-        $stmt->execute([$nom, $prenom, $telephone, $email, $password]);
+        $stmt->execute([$nom, $prenom, $telephone, $email, $password,$date_inscription, $image_path]);
     }
     public function authentification($email, $password){
         $query = "SELECT * FROM " . $this->table_resp . " WHERE email = ? ";

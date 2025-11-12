@@ -9,10 +9,10 @@
 </head>
 <body>
     <h1>Inscription</h1>
-    <form action="/public/index.php?responsable/inscription" method="post">
+    <form action="/public/index.php?responsable/inscription" method="post" enctype="multipart/form-data" id="formulaire">
         <div class="gp">
             <label for="nom">Nom</label>
-            <input type="text" name="nom" id="nom" required>
+            <input type="text" name="nom" id="nom" required oninput="this.value = this.value.toUpperCase();">
         </div>
         <div class="gp">
             <label for="prenom">Prénom</label>
@@ -35,8 +35,11 @@
             <input type="password" name="password_conf" id="password" required>
         </div>
         <div class="gp">
+            <input type="file" name="image_responsable" id="" accept="image/*" required>
+        </div>
+        <div class="gp">
             <button type="submit" class="btn btn-primary">S'inscrire</button>
-            <a href="profil.php">Annuler</a>
+            <a href="/public/index.php?responsable/profil" class="annuler">Annuler</a>
         </div>
     </form>
 </body>

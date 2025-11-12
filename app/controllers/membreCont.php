@@ -6,7 +6,6 @@ class MembreCont{
     public function __construct(){
         $this->membre = new MembreMod();
     }
-
     public function index(){
         require_once __DIR__ . '/../views/responsable/profil.php';
     }
@@ -32,7 +31,7 @@ class MembreCont{
         require_once __DIR__ . '/../views/index.php';
     }
     public function lire_livre(){
-        $livre = $this->membre->read_livre();
+        $resul = $this->membre->read_livre();
         require_once __DIR__ . '/../views/livre/livre.php';
     }
     public function creer(){
@@ -66,10 +65,16 @@ class MembreCont{
             $email = $_POST['email'];
             $mdp = $_POST['password'];
             $conf = $_POST['password_conf'];
+            $date_inscription = date("Y-m-d ");
+
+            $dossier = __DIR__ . '/../views/responsable/upload_responsable/';
+            $fichier = basename($_FILES['image_responsable']['name']);
+            move_uploaded_file($_FILES['image_responsable']['tmp_name'], $dossier . $fichier);
+            $image_path = __DIR__ . '/../views/responsable/upload_responsable/' . $fichier;
 
             if($mdp === $conf){
                 $password = password_hash($mdp, PASSWORD_BCRYPT);
-                if($this->membre->ajout_responsable($nom, $prenom, $telephone, $email, $password)){
+                if($this->membre->ajout_responsable($nom, $prenom, $telephone, $email, $password, $date_inscription,$image_path)){
                 header('Location: /bibliotheque_app_web/app/views/responsable/profil.php');
                 exit;
                 }
@@ -85,6 +90,10 @@ class MembreCont{
                 Session_gest::set('password_hash', $data['password_hash']);
                 Session_gest::set('nom', $data['nom']);
                 Session_gest::set('id', $data['responsable_id']);
+                Session_gest::set('responsable_path', $data['responsable_path']);
+                Session_gest::set('prenom', $data['prenom']);
+                Session_gest::set('telephone', $data['telephone']);
+                Session_gest::set('date_creation', $data['date_creation']);
                 return $data;
             }else{
                 return false;
@@ -95,23 +104,12 @@ class MembreCont{
     }
     
     public function deconnexion(){
-        session_gest::delete('email');
-        session_gest::delete('nom');
-        session_gest::delete('password_hash');
-        session_gest::delete('id');
+        session_unset();
         Session_gest::destroy();
-        // Empêcher le cache des pages protégées
-if(Session_gest::get('email')){
-            header('Cache-Control: no-store, no-cache, must-revalidate');
-            header('Pragma: no-cache');
-            header('Expires: 0');
-
-            header('Location : ../views/responsable/profil.php');
-            exit;
-        }else{
-            header('Location: ../views/index.php'); 
-            exit;
-        }
+       
+        header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+        header("Cache-Control: post-check=0, pre-check=0", false);
+        header("Pragma: no-cache");
     }
     public function lire_membre(){
         $resul = $this->membre->read();
@@ -120,10 +118,10 @@ if(Session_gest::get('email')){
 
 
     public function dashboard(){
-        header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
-        header('Cache-ontrol: post-check=0, pre-check=0', false);
-        header('Pragma: no-cache');
-        header('Expires: 0');
+        // header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+        // header('Cache-ontrol: post-check=0, pre-check=0', false);
+        // header('Pragma: no-cache');
+        // header('Expires: 0');
 
         if(empty(Session_gest::get('email'))){
             header('Location: ../views/responsable/profil.php');

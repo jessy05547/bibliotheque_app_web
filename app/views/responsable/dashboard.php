@@ -14,7 +14,6 @@
 
     <h1>tableau de bord</h1>
     
-
     <script>
         // Forcer reload si la page est chargée depuis le back-forward cache
         window.addEventListener('pageshow', function(event) {

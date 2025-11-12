@@ -1,3 +1,18 @@
+<?php 
+    if(!isset($_SESSION)){
+        header('Location : responsable/profil.php');    
+    }else{
+    $nom = Session_gest::get('nom');
+    $prenom = Session_gest::get('prenom');
+    $telephone = Session_gest::get('telephone');
+    $mail = Session_gest::get('email');
+    $date_creation = Session_gest::get('date_creation');
+
+    $image_path_responsable = Session_gest::get('responsable_path');
+    $path = strstr($image_path_responsable, 'app');
+    $path_reponsable = str_replace('\controllers/..', '', $path);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,15 +29,21 @@
     <div class="cor">
         <section>
             <a href="/public/index.php?membre/liste" class="menu_l"><img src="/public/img/utilisateurs-alt.png" alt="" id="img"><span class="lab">Adhérant</span></a>
-            <a href="/public/index.php?liste_livre" class="menu_l"><img src="/public/img/livre-marque-page.png" alt="" id="img"><span class="lab">Livre</span></a>
+            <a href="/public/index.php?livre/liste" class="menu_l"><img src="/public/img/livre-marque-page.png" alt="" id="img"><span class="lab">Livre</span></a>
             <a href="/public/index.php?dashboard" class="menu_l"><img src="/public/img/tableau-de-bord.png" alt="" id="img"><span class="lab">Tableau de bord</span></a>
             <p class="date"><?php echo date("l d F Y"); ?></p>
         </section>
         <footer>
-            <a href="/public/index.php?setting" target="_blank" class="parametre"><?php 
-                echo Session_gest::get('nom');
-            ?></a>
-            <a href="/public/index.php?deconnexion">Deconnexion</a>
+            <div class="responsable">
+                <a href="/public/index.php?setting" class="parametre">
+                    <img src="<?= "/" . htmlspecialchars($path_reponsable);?>" alt="responsable image" id="profil_image">
+                    <?php
+                    echo $nom;
+                    ?>
+                </a>
+            </div>
+            
+            <a href="/public/index.php?responsable/deconnexion">Deconnexion</a>
             
         </footer>
         <div class="right">
@@ -46,6 +67,6 @@
                 </div>
             </nav>
             <main>
-        
+        <!-- <img src="/app/views/responsable/upload_responsable/FB_IMG_17179940133725332.jpg" alt=""> -->
     <script src="/public/js/app.js"></script>
         

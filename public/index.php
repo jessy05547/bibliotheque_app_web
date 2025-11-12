@@ -47,6 +47,7 @@ switch($action){
         break;
     case 'responsable/inscription':
         $membre->creer_reponsable();
+        include_once '../app/views/responsable/profil.php';
         break;
     case 'responsable/connexion':
         if($membre->identification_responsable($_POST['email'], $_POST['password'])){
@@ -60,8 +61,11 @@ switch($action){
         $membre->ajout_livre();
         break;
     case 'reponsable/deconnexion':
-        $membre->deconnexion();
-        include_once '../app/views/responsable/profil.php';
+        if($membre->deconnexion()){
+            include_once '../app/views/responsable/profil.php';
+        }else{
+            include_once '../app/views/responsable/profil.php';
+        }
         break;
     case 'responsable/profil':
         include_once '../app/views/responsable/profil.php';
@@ -75,9 +79,9 @@ switch($action){
     case 'ajout_livre':
         include_once '../app/views/livre/nouveau_livre.php';
         break;
-    case 'liste_livre':
-        include_once '../app/views/livre/livre.php';
-        break;
+    // case 'liste_livre':
+    //     include_once '../app/views/livre/livre.php';
+    //     break;
     case 'setting':
         include_once '../app/views/fonction/setting.php';
         require_once __DIR__ . '/../app/views/index.php';
@@ -98,7 +102,6 @@ switch($action){
         include_once '../app/views/fonction/search.php';
         require_once __DIR__ . '/../app/views/index.php';
         break;
-
     default:
         include_once '../app/views/responsable/profil.php';
         break;       
