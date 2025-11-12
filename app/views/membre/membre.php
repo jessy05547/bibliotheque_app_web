@@ -10,7 +10,7 @@
     <!-- 
         action ==> chemin vers le routeur?action à faire dans le routeur.
     -->
-    <form action="/public/index.php?membre_ajout" method="post">
+    <form action="/public/index.php?membre_ajout" method="post" enctype="multipart/form-data">
         <div class="gp">
             <input type="text" name="nom" id="" placeholder="Votre nom">
         </div>
@@ -27,15 +27,15 @@
             <input type="text" name="age" id="" placeholder="votre age">
         </div>
         <div class="gp">
-            <input type="date" name="date" id="" pattern="dd/mm/yyyy" title="dd/mm/yyyy" required>
-        </div>
-        <div class="gp">
             <label for="sexe">Homme</label>
             <input type="radio" name="sexe" id="" value="Homme">
         </div>
         <div class="gp">
             <label for="sexe">Femme</label>
             <input type="radio" name="sexe" id="" value="Femme">
+        </div>
+        <div class="gp">
+            <input type="file" name="image_membre" id="" accept="image/*" required>
         </div>
         <input type="submit" value="Enregistrer">
     </form>

@@ -13,13 +13,19 @@ class MembreCont{
     public function ajout_livre(){
         if($_POST){
             $titre = $_POST['titre'];
+            $code  = $_POST['code'];
             $auteur = $_POST['auteur'];
             $type = $_POST['type'];
             $edition = $_POST['edition'];
-            $date_acquisition = $_POST['date_acquisition'];
+            $date_acquisition = date("Y-m-d H:i:s");
 
-            if($this->membre->ajout_livre($titre, $auteur, $type, $edition, $date_acquisition)){
-                header('Location: /public/index.php?liste_livre');
+            $dossier = __DIR__ . '/../views/livre/upload/';
+            $fichier = basename($_FILES['photo_livre']['name']);
+
+            move_uploaded_file($_FILES['photo_livre']['tmp_name'], $dossier . $fichier);
+            $photo_livre = __DIR__ . '/../views/livre/upload/' . $fichier;
+            
+            if($this->membre->ajout_livre($titre,$code, $auteur, $type, $edition, $date_acquisition, $photo_livre)){
                 exit;
             }
         }
@@ -37,10 +43,16 @@ class MembreCont{
             $email = $_POST['email'];
             $age = $_POST['age'];
             $sexe = $_POST['sexe'];
-            $date_inscription = $_POST['date'];
+            $date_inscription = date("Y-m-d ");
 
-            if($this->membre->ajout_membre($nom, $prenom, $telephone, $email, $age, $sexe, $date_inscription)){
-                header('Location: /bibliotheque_app_web/app/views/membre/liste_membre.php');
+            $dossier = __DIR__ . '/../views/membre/upload_membre/';
+            $fichier = basename($_FILES['image_membre']['name']);
+            move_uploaded_file($_FILES['image_membre']['tmp_name'], $dossier . $fichier);
+            
+            $membre_path = __DIR__ . '/../views/membre/upload_membre/' . $fichier;
+
+            if($this->membre->ajout_membre($nom, $prenom, $telephone, $email, $age, $sexe, $date_inscription, $membre_path)){
+                // header('Location: /bibliotheque_app_web/app/views/membre/liste_membre.php');
                 exit;
             }
         }
@@ -89,7 +101,7 @@ class MembreCont{
         session_gest::delete('id');
         Session_gest::destroy();
         // Empêcher le cache des pages protégées
-if(empty(Session_gest::get('email'))){
+if(Session_gest::get('email')){
             header('Cache-Control: no-store, no-cache, must-revalidate');
             header('Pragma: no-cache');
             header('Expires: 0');
@@ -113,10 +125,10 @@ if(empty(Session_gest::get('email'))){
         header('Pragma: no-cache');
         header('Expires: 0');
 
-        // if(empty($_SESSION['email'])){
-        //     header('Location: ../views/responsable/profil.php');
-        //     exit;
-        // }
+        if(empty(Session_gest::get('email'))){
+            header('Location: ../views/responsable/profil.php');
+            exit;
+        }
     }
     public function cache(){
         $mail = Session_gest::get('email');

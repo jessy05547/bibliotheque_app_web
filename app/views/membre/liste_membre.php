@@ -9,12 +9,6 @@
 </head>
 <body>
     <div class="tableau">
-    // Forcer reload si la page est reprise depuis le back-forward cache
-    window.addEventListener('pageshow', function(event) {
-        if (event.persisted) {
-            window.location.reload(true);
-        }
-    });
         <table border="1">
             <thead>
                 <tr>
@@ -45,5 +39,13 @@
             </tbody>
         </table>
     </div>
+    <script>
+        // Forcer reload si la page est reprise depuis le back-forward cache
+    window.addEventListener('pageshow', function(event) {
+        if (event.persisted) {
+            window.location.reload(true);
+        }
+    });
+    </script>
 </body>
 </html>

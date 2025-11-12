@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/public/css/bootstrap-5.3.7-dist/css/bootstrap.css">
     <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="shortcut icon" href="/public/img/Gemini_Generated_Image_ae2i9bae2i9bae2i-removebg-preview.png" type="image/x-icon">
     <title>Document</title>
 </head>
 <body>
@@ -46,4 +47,5 @@
             </nav>
             <main>
         
+    <script src="/public/js/app.js"></script>
         

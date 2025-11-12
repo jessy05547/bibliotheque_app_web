@@ -4,7 +4,7 @@ require_once __DIR__ . '/../../core/session_gest.php';
 Session_gest::start();
 
 // Si déjà authentifié, rediriger vers le tableau de bord
-if (empty(Session_gest::get('email'))) {
+if (Session_gest::get('email')) {
     header('Location: /public/index.php?dashboard');
     exit;
 }

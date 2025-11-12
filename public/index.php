@@ -17,8 +17,9 @@ $requete = $_SERVER['REQUEST_URI'];
 $lien = parse_url($requete, PHP_URL_QUERY);
 $action = $lien;
 
+    // echo "le lien est :" . $action;
 $id = isset($_GET['membre_id']) ? $_GET['membre_id'] : null;
-$cond = $action == 'responsable/connexion';
+$action == 'responsable/connexion';
 
 switch($action){
     case 'index':
@@ -60,11 +61,7 @@ switch($action){
         break;
     case 'reponsable/deconnexion':
         $membre->deconnexion();
-        if(!empty($_SESSION['email'])){
-            include_once '../app/views/responsable/profil.php';
-        }else{
-            include_once '../app/views/index.php';
-        }
+        include_once '../app/views/responsable/profil.php';
         break;
     case 'responsable/profil':
         include_once '../app/views/responsable/profil.php';
@@ -101,8 +98,9 @@ switch($action){
         include_once '../app/views/fonction/search.php';
         require_once __DIR__ . '/../app/views/index.php';
         break;
+
     default:
         include_once '../app/views/responsable/profil.php';
         break;       
 }
-?>
+ ?>
